@@ -1,18 +1,8 @@
+import { makeListTemplate } from '../src/list-component.js';
+
 const test = QUnit.test;
 
 QUnit.module('create list template');
-
-function makeListTemplate(film) {
-    const html = /*html*/`
-        <li>
-            <a href="/description.html?id=${film.id}">${film.title}</a>
-            <span>(${film.release_date})</span>
-        </li>
-    `;
-    const template = document.createElement('template');
-    template.innerHTML = html;
-    return template.content;
-}
 
 test('list template', assert => {
     // arrange
