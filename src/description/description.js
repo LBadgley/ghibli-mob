@@ -1,25 +1,16 @@
-import testArray from '../../data/testArr.js';
 import { makeDetailTemplate } from './table-component.js';
 
 const searchParams = new URLSearchParams(window.location.search);
 const idToFind = searchParams.get('id');
 const filmDetail = document.getElementById('film-detail');
 
+const URL = `https://ghibliapi.herokuapp.com/films/${idToFind}`;
 
-let currentFilm = {};
-for(let i = 0; i < testArray.length; i++) {
-    if(testArray[i].id === idToFind) {
-        currentFilm = testArray[i];
-        break;
-    }
-}
+fetch(URL)
+    .then(response => response.json())
+    .then(result => {
+        const dom = makeDetailTemplate(result);
+        filmDetail.appendChild(dom);
+    });
 
-// testArray.forEach(film => {
-//     if(film.id === idToFind) {
-//         currentFilm = film;
-//     }
-// });
-
-const dom = makeDetailTemplate(currentFilm);
-filmDetail.appendChild(dom);
 
